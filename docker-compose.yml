@@ -113,7 +113,7 @@ services:
 ### MySQL Container #########################################
 
     mysql:
-        build: 
+        build:
             context: ./mysql
             args:
                 - MYSQL_DATABASE=homestead
@@ -311,6 +311,17 @@ services:
             - "9300:9300"
         links:
             - php-fpm
+
+### Quee worker Container ####################################
+
+    queue:
+        build: ./queue
+        command:
+            - --queue=default
+        links:
+            - php-fpm
+        volumes_from:
+            - applications
 
 ### Volumes Setup ###########################################
 
